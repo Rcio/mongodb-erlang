@@ -204,7 +204,7 @@ command(Command) ->
 assign_id(Doc) ->
 	case bson:lookup('_id', Doc) of
 		{_Value} -> Doc;
-		{} -> bson:update('_id', mongo_id_server:object_id(), Doc)
+		{} -> bson:update('_id', mongo_sup:object_id(), Doc)
 	end.
 
 %% @private
