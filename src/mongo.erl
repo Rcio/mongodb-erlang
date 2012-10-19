@@ -37,6 +37,7 @@
 -type write_mode() :: unsafe | safe | {safe, bson:document()}.
 -type read_mode()  :: master | slave_ok.
 -type action(A)    :: fun (() -> A).
+-type opts() :: [{db, database()}, {write_mode, write_mode()}, {read_mode, read_mode()}].
 
 -record(context, {
 	write_mode :: write_mode(),
@@ -45,6 +46,11 @@
 	database   :: database()
 }).
 
+-record(config, {
+	database   :: database(),
+	write_mode :: write_mode(),
+	read_mode  :: read_mode()
+}).
 
 %% @doc Execute mongo action under given write_mode, read_mode, connection, and database.
 -spec do(write_mode(), read_mode(), connection(), database(), action(A)) -> A.
